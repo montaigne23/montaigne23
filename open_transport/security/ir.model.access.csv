@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_open_transport_open_transport,open_transport.open_transport,model_open_transport_open_transport,base.group_user,1,1,1,1
+access_open_transport_gestiontrajets,open_transport.gestiontrajets,model_open_transport_gestiontrajets,base.group_user,1,1,1,1
+access_open_transport_villes,open_transport.villes,model_open_transport_villes,base.group_user,1,1,1,1
+access_open_transport_assurance,open_transport.assurance,model_open_transport_assurance,base.group_user,1,1,1,1
+access_open_transport_res_partner,open_transport.res_partner,model_open_transport_res_partner,base.group_user,1,1,1,1
+access_open_transport_facturation,open_transport.facturation,model_open_transport_facturation,base.group_user,1,1,1,1

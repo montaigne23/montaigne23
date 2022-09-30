@@ -1,0 +1,100 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="post_cloture.sexion_line_list_view">
+      <field name="name">cloture sexion line list</field>
+      <field name="model">post_cloture.sexion_line</field>
+      <field name="arch" type="xml">
+        <tree create="0" editable="top">
+          <field name="user_id"/>
+          <field name="methode_payement_id"/>
+          <field name="date_start"/>
+          <field name="date_close"/>
+          <field name="total_sale" invisible = "1"/>
+          <field name="recovery_amount" invisible = "1"/>
+		  <field name="solde_theoric" sum= "ttetheo"/>
+          <field name="real_liquidity" sum= "ttliqu"/>
+          <field name="cash_difference" sum= "ttecart"/>
+          <field name="total_liquidity" invisible = "1"/>
+          <field name="total_sale" invisible = "1"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="post_cloture.sexion_line_form_view">
+      <field name="name">cloture sexion line form</field>
+      <field name="model">post_cloture.sexion_line</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group col="2">
+              <group>
+                <separator string="Informations" colspan="8" style="font-size :30px;"/>                        
+                <field name="user_id"/>
+                <field name="sexion_id"/>
+                <field name="date_start"/>
+                <field name="date_close"/>
+              </group>
+              <group>
+                <separator string="Informations de Vente" colspan="8" style="font-size :30px;"/>                        
+                <field name="recovery_amount"/>
+                <field name="real_liquidity"/>
+                <field name="solde_theoric"/>
+                <field name="cash_difference"/>
+                <field name="total_liquidity"/>
+                <field name="total_sale"/>
+                <field name="methode_payement_id"/>
+                <field name="Commentaire"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="post_cloture.sexion_line_action_window">
+      <field name="name">cloture sexion window</field>
+      <field name="res_model">post_cloture.sexion_line</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="post_cloture.action_server">
+      <field name="name">post_cloture server</field>
+      <field name="model_id" ref="model_post_cloture_post_cloture"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <!-- <menuitem name="Pos cloture" id="post_cloture.menu_root" sequence="5"/> -->
+
+    <!-- menu categories -->
+
+    <!-- <menuitem name="Post cloture sexion" id="post_cloture.sexion" parent="post_cloture.menu_root"/> -->
+    <!-- <menuitem name="pos cloture sexion" id="post_cloture.sexion" parent="post_cloture.menu_root" sequence="20"/>
+    <menuitem name="Pos cloture sexion" id="post_cloture.sexion_l" parent="post_cloture.sexion"
+    action="post_cloture.sexion_line_action_window" sequence="20"/> -->
+
+    <!-- actions -->
+
+    <!-- <menuitem name="List" id="post_cloture.menu_1_list" parent="post_cloture.menu_1"
+              action="post_cloture.action_window"/>
+    <menuitem name="Server to list" id="post_cloture" parent="post_cloture.menu_2"
+              action="post_cloture.action_server"/> -->
+
+  </data>
+</odoo>

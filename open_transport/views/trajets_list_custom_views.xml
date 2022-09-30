@@ -1,0 +1,71 @@
+<odoo>
+    <data>
+
+          <!-- explicit list view definition -->
+      
+          <record model="ir.ui.view" id="trajet_list_custom_view">
+            <field name="name">Liste des Trajets list custom</field>
+            <field name="model">open_transport.trajets_list_custom</field>
+            <field name="arch" type="xml">
+                <tree string="trajets lists" editable="top"> 
+                  <field name="trajet_id"/>
+                  <field name="depard"/>
+                  <field name="arrive"/>
+                  <field name="nbr_colis"/>
+                  <field name="designation"/>
+                  <field name="poids_brute"/>
+                  <field name="Cubage"/>
+                  <field name="amende"/>
+              </tree>
+            </field>
+          </record>
+          <record model="ir.ui.view" id="trajet_form_custom_view">
+            <field name="name">Liste des Trajets form custom</field>
+            <field name="model">open_transport.trajets_list_custom</field>
+            <field name="arch" type="xml">
+                <form> 
+                  <sheet>
+                    <group>
+                        <field name="trajet_id"/>
+                        <field name="depard"/>
+                        <field name="arrive"/>
+                        <field name="nbr_colis"/>
+                        <field name="designation"/>
+                        <field name="poids_brute"/>
+                        <field name="Cubage"/>
+                        <field name="amende"/>
+                    </group>
+                  </sheet>
+              </form>
+            </field>
+          </record>
+          <!-- <record model="ir.ui.view" id="trajet_form_custom_view">
+            <field name="name">Liste des Trajets form custom</field>
+            <field name="model">open_transport.trajets_list_custom</field>
+            <field name="arch" type="xml">
+                <form> 
+                  <sheet>
+                    <field name="trajet_id" widget="res_partner_many2one"/>
+                    <field name="depard"/>
+                    <field name="arrive"/>
+                    <field name="nbr_colis"/>
+                    <field name="poids_brute"/>
+                    <field name="Cubage"/>
+                    <field name="cout"/>
+                  </sheet>
+              </form>
+            </field>
+          </record> -->
+      
+          <!-- actions opening views on models -->
+      
+          <record model="ir.actions.act_window" id="trajet_list_custom_action_window">
+            <field name="name">Trajet_list_custom</field>
+            <field name="res_model">open_transport.trajets_list_custom</field>
+            <field name="view_mode">tree, form</field>
+          </record>
+      
+      
+
+    </data>
+</odoo>

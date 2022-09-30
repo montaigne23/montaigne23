@@ -1,0 +1,150 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    
+    <record model="ir.ui.view" id="student_list_view">
+      <field name="name"> liste des élèves</field>
+      <field name="model">school.student</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="matricule"/>
+          <!-- <field name="f_name"/>
+          <field name="l_name"/> -->
+          <field name="sexe"/>
+          <field name="identity_card"/>
+          <field name="birthday"/>
+          <field name="registration_date"/>
+          <!-- <field name="department_id"/> -->
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="student_form_view">
+      <field name="name">student form</field>
+      <field name="model">school.student</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <!-- <button name="action_open" states="futur" type="object" string="Start Contract" class="oe_highlight" groups="fleet.fleet_group_manager"/>
+            <button name="action_close" states="futur" type="object" string="Cancel" groups="fleet.fleet_group_manager"/>
+            <button name="action_close" states="open,expired,futur" type="object" class="oe_highlight" string="Close Contract" groups="fleet.fleet_group_manager"/>
+            <button name="action_draft" states="closed" type="object" string="Reset To Draft" groups="fleet.fleet_group_manager"/> -->
+            <field name="state" widget="statusbar" />
+        </header>
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                  <field name="matricule" readonly="1" />
+              </h1>
+            </div>
+            <field name="image_1920" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_1920&quot;}"/>
+            <div class="oe_title">
+              <label for="login" string="Login"/>
+              <h2 style="color:blue;" ><field name="login"/></h2>
+          </div>
+            <group>
+              <group>
+                <separator string="Informations de l'élève" colspan="8" style="font-size :30px;"/>                        
+                <field name="name" placeholder="Ex. FOKOU" />
+                <!-- <field name="l_name" placeholder="Ex. MONTAIGNE"/> -->
+                <field name="sexe" placeholder="Ex. Male"/>
+                <field name="birthday" placeholder="Ex. 12/03/2009"/>
+                <!-- <field name="identity_card" placeholder="Ex. 4323679879"/> -->
+                <separator string="Activité Sportive" colspan="8"/>                        
+                <field name="state_physic" widget="radio"/>
+              </group>
+              
+              <group>
+                <separator string="Statut de l'élève" colspan="8" style="font-size :30px;"/>                        
+                <field name="department_id" placeholder="Ex. Anglophone"/>
+                <field name="classroom_id" placeholder="Ex. Tle C" attrs="{'invisible':[('department_id', '=', False)]}"/>
+                <separator string="Situation Scolaire" colspan="8" attrs="{'invisible':[('classroom_id', '=', False)]}"/>                        
+                <field name="situation_eleve" widget="radio" attrs="{'invisible':[('classroom_id', '=', False)]}"/>
+                <field name="nbr_redouble" attrs="{'invisible':[('situation_eleve', '!=', 'Redoublant')]}"/>
+                <separator string="Type d'élève" colspan="8" attrs="{'invisible':[('situation_eleve', '=', False)]}"/>                        
+                <field name="type_eleve" widget="radio" attrs="{'invisible':[('situation_eleve', '=', False)]}"/>
+              </group>
+              <group>
+                <field name="function" placeholder="e.g. Sales Director"/>
+                <field name="title" options="{&quot;no_open&quot;: True}" placeholder="e.g. Mister"/>
+            </group>              
+              <group>
+                <separator string="Contact de l'élève" colspan="8" style="font-size :30px;"/>                        
+                <span class="o_form_label o_td_label" name="address_name">
+                    <b>Address</b>
+                </span>
+                <div class="o_address_format">
+                    <field name="street" placeholder="Street..." class="o_address_street"/>
+                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                    <field name="city" placeholder="City" class="o_address_city"/>
+                    <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" invisible="1"/>
+                    <field name="zip" placeholder="ZIP" class="o_address_zip" invisible="1"/>
+                    <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                </div>
+                <field name="phone" widget="phone"/>
+                <field name="email" widget="email" context="{'gravatar_image': True}"/>
+              </group>
+              <group>
+                <separator string="Information des parents ou tuteur" colspan="8" style="font-size :30px;"/>                        
+                <field name="f_name_pere" placeholder="Ex. TCHOUBETCHU ANDRE"/>
+                <field name="f_name_mere" placeholder="Ex. DJUELA VERONIQUE"/>
+              </group>
+              <group>
+                <separator string="Contact des parent ou tuteur" colspan="8" style="font-size :30px;"/>                        
+                <field name="address_parent" placeholder="Ex. "/>
+                <field name="email_parent" widget="email" placeholder="Ex. emails@gmail.com"/>
+                <field name="phone_parent1" widget="phone"/>
+                <field name="phone_parent2" widget="phone"/>
+              </group>
+              <group>
+                <separator string="Date d'enregistrement" colspan="8" style="font-size :30px;"/>                        
+                <field name="registration_date" placeholder="Ex. Aujourd'hui" attrs="{'readonly':[('matricule', '!=', ' ')]}"/>
+              </group>
+            </group>
+            </sheet>
+          </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="student_action_window">
+      <field name="name">Eleves</field>
+      <field name="res_model">school.student</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="school.action_server">
+      <field name="name">school server</field>
+      <field name="model_id" ref="model_school_school"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="School" id="school_menu_root" sequence="5"/>
+
+    <!-- menu categories -->
+    <menuitem name="Eleves" id="school_student_cat" parent="school_menu_root" sequence="20"/>
+   <!--
+ <menuitem name="Menu 2" id="school.menu_2" parent="school.menu_root"/>
+-->
+    <!-- actions -->
+    <menuitem name="Liste des élèves" id="school_student_list" parent="school_student_cat"
+              action="student_action_window" sequence="30"/>
+    <!--
+<menuitem name="Server to list" id="school" parent="school.menu_2"
+              action="school.action_server"/>
+-->
+  </data>
+</odoo>

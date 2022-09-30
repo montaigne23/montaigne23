@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+
+          <!-- explicit list view definition -->
+      
+          <record model="ir.ui.view" id="facturation_list_view">
+            <field name="name">Liste des Facturation</field>
+            <field name="model">open_transport.facturation</field>
+            <field name="arch" type="xml">
+                <tree string="Element de Facturation" editable="top"> 
+                  <field name="debour_id" options="{'no_create_edit': True}"/>
+                  <field name="quantite"/>
+                  <field name="base"/>
+                  <field name="MontHT"/>
+                  <field name="tax_id" widget="many2many_tags"/>
+                  <field name="MontTC"/>
+              </tree>
+            </field>
+          </record>
+
+          <record model="ir.ui.view" id="facturation_form_view">
+            <field name="name">Facturation form</field>
+            <field name="model">open_transport.facturation</field>
+            <field name="arch" type="xml">
+                <form> 
+                  <sheet>
+                    <group>
+                        <field name="debour_id"/>
+                        <field name="quantite"/>
+                        <field name="base"/>
+                        <field name="MontHT"/>
+                        <field name="taxes_id" widget="many2many_tags"/>
+                        <field name="MontTC"/>
+                    </group>
+                  </sheet>
+              </form>
+            </field>
+          </record>
+          <!-- actions opening views on models -->
+      
+          <record model="ir.actions.act_window" id="facturation_action_window">
+            <field name="name">facturation</field>
+            <field name="res_model">open_transport.facturation</field>
+            <field name="view_mode">tree, form</field>
+          </record>
+      
+    </data>
+</odoo>

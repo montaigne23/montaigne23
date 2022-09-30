@@ -1,0 +1,89 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="classroom_list_view">
+      <field name="name">classroom list</field>
+      <field name="model">school.classroom</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="classroom_name"/>
+          <field name="code"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="classroom_form_view">
+      <field name="name">classroom form</field>
+      <field name="model">school.classroom</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="classroom_name"/>
+              <field name="code"/>
+            </group>
+            <group class="row">
+              <field name="num_prof" class="col"/>
+              <field name="num_sub" class="col"/>
+              <field name="num_stu" class="col"/>
+            </group>
+            <notebook>
+              <page string="Liste des professeurs">
+                <field name="professor_ids"/> 
+              </page>
+              <page string="Liste des Matières">
+                <field name="subject_ids"/>
+              </page>
+              <page string="Liste des étudiants">
+                <field name="student_ids"/>
+              </page>
+            </notebook>
+        </sheet>
+        </form>
+
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="classroom_action_window">
+      <field name="name">Classe</field>
+      <field name="res_model">school.classroom</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="school.action_server">
+      <field name="name">school server</field>
+      <field name="model_id" ref="model_school_school"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="School" id="school_menu_root" sequence="5"/>
+
+    <!-- menu categories -->
+    <menuitem name="Sale de classe" id="school_classroom_cat" parent="school_menu_root" sequence="20"/>
+   <!--
+ <menuitem name="Menu 2" id="school.menu_2" parent="school.menu_root"/>
+-->
+    <!-- actions -->
+    <menuitem name="Liste de sale de classe" id="school_classroom_list" parent="school_classroom_cat"
+              action="classroom_action_window" sequence="30"/>
+    <!--
+<menuitem name="Server to list" id="school" parent="school.menu_2"
+              action="school.action_server"/>
+-->
+  </data>
+</odoo>

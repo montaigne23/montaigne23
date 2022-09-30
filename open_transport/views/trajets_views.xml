@@ -1,0 +1,161 @@
+<odoo>
+    <data>
+
+          <!-- explicit list view definition -->
+      
+          <record model="ir.ui.view" id="trajet_list_view">
+            <field name="name">Liste des Trajets</field>
+            <field name="model">open_transport.gestiontrajets</field>
+            <field name="arch" type="xml">
+              
+
+                <tree> 
+                  <field name="code"/>
+                  <field name="depard"/>
+                  <field name="arrive"/>
+                  <!-- <field name="amende_frais"/> -->
+                  <!-- <field name="carburant_prix_unitaire"/> -->
+                  <!-- <field name="quantites"/> -->
+                  <!-- <field name="MtTotal"/> -->
+                  <field name="duree_trajet"/>
+                  <field name="amende"/>
+              </tree>
+            
+            </field>
+          </record>
+      
+          <record model="ir.ui.view" id="trajet_form_view">
+            <field name="name">trajet form</field>
+            <field name="model">open_transport.gestiontrajets</field>
+            <field name="arch" type="xml">
+              <form>
+                <sheet>
+                    <div class="oe_title">
+                      <h1>
+                          <field name="code" readonly="1" />
+                      </h1>
+                    </div>
+                    <groupe class="row">
+                      <!-- <div style="margin-left: 30%;" class="row"> -->
+                      <group class="col-5"  style="margin-left:30px;" >
+                        <div>
+                          <separator string="Information sur le trajet" colspan="8" style="font-size :20px;"/>
+                          
+                          <!-- <separator string="Informations" colspan="4"/> -->
+                      
+                          <div class="row">
+                            <label for="depard" string="Point de Dépard" class="col-4"/> 
+                            <div class="col">                   
+                              <field name="depard" />
+                          </div>
+                        </div>
+                          <div class="row">
+                            <label for="arrive" string="Point d'arrivé" class="col-4"/> 
+                            <div class="col">                   
+                              <field name="arrive" />
+                          </div>
+                        </div>
+                          <div class="row">
+                            <label for="amende" string="Coût" class="col-4"/> 
+                            <div class="col">                   
+                              <field name="amende" />
+                          </div>
+                        </div>
+                          <div class="row">
+                            <label for="duree_trajet" string="Durée du Trajet (Heures)" class="col-4"/> 
+                            <div class="col">                   
+                              <field name="duree_trajet" />
+                          </div>
+                        </div>
+                        </div>
+                    </group>
+                    <div class="col-1"></div>
+                      <group class="col-5">
+                        <div>
+                          <separator string="Coût Carburant" colspan="8" style="font-size :20px;"/>
+                          <div class="row">
+                            <label for="carburant_prix_unitaire" string="Prix Unitaire Carburant" class="col-4"/> 
+                            <div class="col">                   
+                              <field name="carburant_prix_unitaire" />
+                          </div>
+                        </div>
+                          <div class="row">
+                            <label for="quantites" string="Quantité carburant (litre)" class="col-4"/> 
+                            <div class="col">                   
+                              <field name="quantites" />
+                          </div>
+                        </div>
+                          <div class="row">
+                            <label for="MtTotal" string="Montant Total Carburant" class="col-4"/> 
+                            <div class="col">                   
+                              <field name="MtTotal" />
+                          </div>
+                        </div>
+                        </div>
+                      </group>
+                      <group class="col-5">
+                        <div>
+                          <separator string="Frais de route" colspan="8" style="font-size :20px;"/>
+                          <div class="row">
+                            <label for="amende_frais" string="Frais de Route" class="col-4"/> 
+                            <div class="col">                   
+                              <field name="amende_frais" />
+                          </div>
+                        </div>
+                        </div>
+                      
+                      </group>
+                      <div class="col-1">
+
+                      </div>
+                    </groupe>     
+                  </sheet>
+                </form>
+            </field>
+          </record>
+      
+          <!-- actions opening views on models -->
+      
+          <record model="ir.actions.act_window" id="trajet_action_window">
+            <field name="name">Trajet</field>
+            <field name="res_model">open_transport.gestiontrajets</field>
+            <field name="view_mode">tree,form</field>
+          </record>
+      
+      
+      
+          <!-- server action to the one above -->
+      <!--
+          <record model="ir.actions.server" id="university.action_server">
+            <field name="name">university server</field>
+            <field name="model_id" ref="model_university_university"/>
+            <field name="state">code</field>
+            <field name="code">
+              action = {
+                "type": "ir.actions.act_window",
+                "view_mode": "tree,form",
+                "res_model": model._name,
+              }
+            </field>
+          </record>
+      -->
+      
+          <!-- Top menu item -->
+      
+          <menuitem name="Open Transport" id="open_transport.menu_root" sequence="5"/>
+      
+          <!-- menu categories -->
+          <menuitem name="Trajets" id="open_transport_trajet_cat" parent="open_transport.menu_root" sequence="20"/>
+         <!--
+       <menuitem name="Menu 2" id="university.menu_2" parent="university.menu_root"/>
+      -->
+          <!-- actions -->
+          <menuitem name="liste des Trajets" id="open_transport_trajets_list" parent="open_transport_trajet_cat"
+                    action="trajet_action_window" sequence="30"/>
+          <!--
+      <menuitem name="Server to list" id="university" parent="university.menu_2"
+                    action="university.action_server"/>
+      -->
+
+    </data>
+</odoo>

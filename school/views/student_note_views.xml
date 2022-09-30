@@ -1,0 +1,90 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="student_note_list_view">
+      <field name="name">note list</field>
+      <field name="model">school.notes</field>
+      <field name="arch" type="xml">
+        <tree editable="top">
+          <field name="student_id"/>
+          <field name="coef"/>
+          <field name="note_S1"/>
+          <field name="note_S2"/>
+          <field name="note_T1"/>
+          <field name="note_S3"/>
+          <field name="note_S4"/>
+          <field name="note_T2"/>
+          <field name="note_S5"/>
+          <field name="note_S6"/>
+          <field name="note_T3"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="student_note_form_view">
+      <field name="name">note form</field>
+      <field name="model">school.notes</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="matricule"/>
+              <field name="student_id"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    <!-- <record id="student_note_search" model="ir.ui.view">
+      <field name="name"> student note Recherche</field>
+      <field name="model">school.notes</field>
+      <field name="arch" type="xml">
+          <search>
+              <field name="f_name"/>
+              <field name="note"/>
+          </search>
+      </field> -->
+<!-- </record> -->
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="note_action_window">
+      <field name="name">Notes</field>
+      <field name="res_model">school.notes</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="school.action_server">
+      <field name="name">school server</field>
+      <field name="model_id" ref="model_school_school"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="School" id="school_menu_root" sequence="5"/>
+
+    <!-- menu categories -->
+    <menuitem name="Eleves" id="school_student_cat" parent="school_menu_root" sequence="20"/>
+   <!--
+ <menuitem name="Menu 2" id="school.menu_2" parent="school.menu_root"/>
+-->
+    <!-- actions -->
+    <menuitem name="Notes" id="school_student_note_list" parent="school_student_cat"
+              action="note_action_window" sequence="30"/>
+    <!--
+<menuitem name="Server to list" id="school" parent="school.menu_2"
+              action="school.action_server"/>
+-->
+  </data>
+</odoo>

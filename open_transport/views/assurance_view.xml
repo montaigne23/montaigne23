@@ -1,0 +1,104 @@
+<odoo>
+    <data>
+
+          <!-- explicit list view definition -->
+      
+          <record model="ir.ui.view" id="assurance_list_view">
+            <field name="name">Liste des assurance</field>
+            <field name="model">open_transport.assurance</field>
+            <field name="arch" type="html">
+                <tree> 
+                  <field name="type_cam"/>
+                  <field name="cout"/>
+                  <field name="poids"/>
+                </tree>
+            </field>
+          </record>
+      
+          <record model="ir.ui.view" id="assurance_form_view">
+            <field name="name">assurance form</field>
+            <field name="model">open_transport.assurance</field>
+            <field name="arch" type="xml">
+              <form>
+                  <sheet>
+                    <group class="row">
+                      <separator string="Informations sur l'Assurance" colspan="8" style="font-size :30px;"/>    
+                      <group class="col-5">
+                        <div class="row">
+                          <label for="type_cam" string="Model de camion" class="col"/>                    
+                          <div class="col">                   
+                            <field name="type_cam"/>
+                        </div>
+                      </div>
+                      </group>
+                      <div class="col-1"></div>
+                      <group class="col-5">
+                        <separator string="Valeur d'Assurance en FCFA" colspan="8" style="font-size :15px;"/> 
+                          <div class="row">
+                            <label for="cout" string="Valeur d'assurance"/>                       
+                            <div class="col">                   
+                              <field name="cout"/>
+                          </div>
+                        </div>
+                      </group>
+                      <div class="col-1"></div>
+                      <group class="col-5">
+                        <separator string="poids net a vide du Camion en Kg" colspan="8" style="font-size :15px;"/>    
+                          <div class="row">
+                            <label for="poids" string="Poids du camion"/>                    
+                            <div class="col">                   
+                              <field name="poids"/>
+                          </div>
+                        </div>
+                      </group>
+                    </group>
+                  </sheet>
+                </form>            
+            </field>
+          </record>
+      
+          <!-- actions opening views on models -->
+      
+          <record model="ir.actions.act_window" id="assurance_action_window">
+            <field name="name">Assurance</field>
+            <field name="res_model">open_transport.assurance</field>
+            <field name="view_mode">tree,form</field>
+          </record>
+      
+      
+      
+          <!-- server action to the one above -->
+      <!--
+          <record model="ir.actions.server" id="university.action_server">
+            <field name="name">university server</field>
+            <field name="model_id" ref="model_university_university"/>
+            <field name="state">code</field>
+            <field name="code">
+              action = {
+                "type": "ir.actions.act_window",
+                "view_mode": "tree,form",
+                "res_model": model._name,
+              }
+            </field>
+          </record>
+      -->
+      
+          <!-- Top menu item -->
+      
+          <menuitem name="Open Transport" id="open_transport.menu_root" sequence="5"/>
+      
+          <!-- menu categories -->
+          <menuitem name="Configurations" id="open_transport_config_cat" parent="open_transport.menu_root" sequence="20"/>
+         <!--
+       <menuitem name="Menu 2" id="university.menu_2" parent="university.menu_root"/>
+      -->
+          <!-- actions -->
+          <menuitem name="Assurance" id="open_transport_assurance_list" parent="open_transport_config_cat"
+                    action="assurance_action_window" sequence="30"/>
+          <!--
+      <menuitem name="Server to list" id="university" parent="university.menu_2"
+                    action="university.action_server"/>
+      -->
+
+    </data>
+</odoo>

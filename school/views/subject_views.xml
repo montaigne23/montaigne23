@@ -1,0 +1,78 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="subject_list_view">
+      <field name="name">Subject list</field>
+      <field name="model">school.subject</field>
+      <field name="arch" type="xml">
+        <tree editable="top">
+          <field name="code"/>
+          <field name="name"/>
+          <field name="coef"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subject_form_view">
+      <field name="name">Subject form</field>
+      <field name="model">school.subject</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group col="2">
+              <group>
+                <separator string="Information de la matière" colspan="8" style="font-size :20px; color:blue;"/>                        
+                <field name="name"/>
+                <field name="coef"/>
+                <field name="code" readonly="1"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="subject_action_window">
+      <field name="name">Matière</field>
+      <field name="res_model">school.subject</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="school.action_server">
+      <field name="name">school server</field>
+      <field name="model_id" ref="model_school_school"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="School" id="school_menu_root" sequence="5"/>
+
+    <!-- menu categories -->
+    <menuitem name="Matières" id="school_subject_cat" parent="school_menu_root" sequence="20"/>
+   <!--
+ <menuitem name="Menu 2" id="school.menu_2" parent="school.menu_root"/>
+-->
+    <!-- actions -->
+    <menuitem name="Liste des Matière" id="school_subject_list" parent="school_subject_cat"
+              action="subject_action_window" sequence="30"/>
+    <!--
+<menuitem name="Server to list" id="school" parent="school.menu_2"
+              action="school.action_server"/>
+-->
+  </data>
+</odoo>

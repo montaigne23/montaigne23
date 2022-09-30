@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <template id="report_pos_cloture">
+    <t t-call="web.html_container">
+      <t t-call= "web.external_layout">
+        <t t-foreach="docs" t-as="doc">
+          <div  style="height:auto;width:1500px">
+            <h4 style="text-align:left; margin-left:67%; font-size:30px;">
+             Cloturé le :  <t t-esc='doc.date'/>
+            </h4>
+          </div>
+          <br/>
+          <div style="width:400px;height:200px;">
+            <div class="row" >
+              <h2 class="col">Montant total théorique :</h2>
+              <strong>
+                <h2 class="col">
+                  <t t-esc='doc.montant_total_th'/>
+                </h2>
+              </strong>
+            </div>
+            <div class="row" >
+              <h2 class="col">total reel :</h2>
+              <strong>
+                <h2 class="col">
+                  <t t-esc='doc.total_reel'/>
+                </h2>
+              </strong>
+            </div>
+            <div class="row" >
+              <h2 class="col">Ecart :</h2>
+              <strong>
+                <h2 class="col">
+                  <t t-esc='doc.ecart'/>
+                </h2>
+              </strong>
+            </div>
+          </div>
+          <div class="row"  style="height:auto;width:900px">
+            <h2 class="col-3">Comentaire:</h2>
+            <h4 class="col" style="text-align:justify; font-size:30px;">
+              <t t-esc='doc.commentaire'/>
+            </h4>
+          </div>
+          <br/>
+          <div style="height:auto;width:1500px">
+          <stron>
+            <h1>Synthese de la journée</h1>
+          </stron>
+          <br/>
+          <br/>
+          <table style="font-size:25px" class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Mode de paiement</th>
+                <th scope="col">Solde théorique</th>
+                <th scope="col">Solde réel</th>
+                <th scope="col">Ecart de caisse</th>
+              </tr>
+            </thead>
+            <tbody>
+              <t t-foreach="doc.post_cloture_sexion_synthese" t-as="ref">
+                <tr>
+                  <th>
+                    <t t-esc='ref.mode_payement'/>
+                  </th>
+                  <th>
+                    <t t-esc='ref.solde_theoric'/>
+                  </th>
+                  <th>
+                    <t t-esc='ref.real_liquidity'/>
+                  </th>
+                  <th>
+                    <t t-esc='ref.cash_difference'/>
+                  </th>
+                </tr>
+              </t>
+            </tbody>
+          </table>
+          </div>
+          <br/>
+          <br/>
+          <div style="height:auto;width:1500px">
+            <stron>
+              <h1>Cloture de la journée</h1>
+            </stron>
+            <br/>
+            <br/>
+            <table style="font-size:25px" class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Caissier</th>
+                  <th scope="col">Mode de paiement</th>
+                  <th scope="col">Date d'ouverture</th>
+                  <th scope="col">Date de fermeture</th>
+                  <th scope="col">Solde théorique</th>
+                  <th scope="col">Solde réel</th>
+                  <th scope="col">Ecart de caisse</th>
+                </tr>
+              </thead>
+              <tbody>
+                <t t-foreach="doc.post_cloture_sexion_line_ids" t-as="ref">
+                  <tr>
+                    <th>
+                      <t t-esc='ref.user_id.name'/>
+                    </th>
+                    <th>
+                      <t t-esc='ref.mode_payement.name'/>
+                    </th>
+                    <th>
+                      <t t-esc='ref.date_start'/>
+                    </th>
+                    <th>
+                      <t t-esc='ref.date_close'/>
+                    </th>
+                    <th>
+                      <t t-esc='ref.solde_theoric'/>
+                    </th>
+                    <th>
+                      <t t-esc='ref.real_liquidity'/>
+                    </th>
+                    <th>
+                      <t t-esc='ref.cash_difference'/>
+                    </th>
+                  </tr>
+                </t>
+              </tbody>
+            </table>
+          </div>
+        </t>
+      </t>
+    </t>
+  </template>
+
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_post_cloture_sexion,post_cloture.sexion,model_post_cloture_sexion,point_of_sale.group_pos_manager,1,1,1,1
+access_post_cloture_sexion_line,post_cloture.sexion_line,model_post_cloture_sexion_line,point_of_sale.group_pos_manager,1,1,1,1
+access_post_cloture_synthese,post_cloture.synthese,model_post_cloture_synthese,point_of_sale.group_pos_manager,1,1,1,1

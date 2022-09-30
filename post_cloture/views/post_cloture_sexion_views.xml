@@ -1,0 +1,86 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="post_cloture_list_view">
+      <field name="name">cloture sexion list</field>
+      <field name="model">post_cloture.sexion</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="date"/>
+          <field name="commentaire"/>
+          <field name="status" widget="badge" decoration-info="status == 'Valider'" decoration-danger="status == 'Cloturer'"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="post_cloture_form_view">
+      <field name="name">cloture sexion form</field>
+      <field name="model">post_cloture.sexion</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <button name="Charger" states="" type="object" string="Charger"  attrs="{'invisible':[('status', '!=', 'Nouveau')]}" class="oe_highlight"/>
+            <button name="Cloturer" states="" type="object" string="Cloturer" attrs="{'invisible':[('status', '!=', 'Valider')]}" />
+            <field name="status" widget="statusbar"/>
+        </header>
+
+          <sheet>
+            <group col="2">
+              <group>
+                <field name="date"  attrs="{'readonly':[('status', '=', 'Cloturer')]}"/>
+                <field name="commentaire" attrs="{'readonly':[('status', '=', 'Cloturer')]}"/>
+              </group>
+              <group>
+                <field name="montant_total_th"/>
+                <field name="total_reel"/>
+                <field name="ecart"/>
+              </group>
+              <separator string="Cloture de la journée" colspan="8" style="font-size :30px;"/>                        
+              <field name="post_cloture_sexion_line_ids" attrs="{'readonly':[('status', '=', 'Cloturer')]}"/>
+              <separator string="Synthese" colspan="8" style="font-size :30px;"/>                        
+              <field name="post_cloture_sexion_synthese" attrs="{'readonly':[('status', '=', 'Cloturer')]}"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="post_cloture_sexion_action_window">
+      <field name="name">cloturer la journée</field>
+      <field name="res_model">post_cloture.sexion</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="post_cloture.action_server">
+      <field name="name">post_cloture server</field>
+      <field name="model_id" ref="model_post_cloture_post_cloture"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="Pos cloture" id="post_cloture.menu_root" sequence="5"/>
+
+    <!-- menu categories -->
+
+    <!-- <menuitem name="pos cloture sexion" id="post_cloture.sexion" parent="post_cloture.menu_root" sequence="20"/> -->
+    <menuitem name="cloturer la journée" id="post_cloture_cloture_sexion" parent="point_of_sale.menu_point_of_sale"
+    action="post_cloture_sexion_action_window" sequence="20"/>
+
+
+  </data>
+</odoo>

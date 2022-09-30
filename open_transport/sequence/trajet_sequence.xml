@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Sequences for sale.order -->
+        <record id="seq_open_transport_gestiontrajets" model="ir.sequence">
+            <field name="name">trajet sequence</field>
+            <field name="code">open_transport.gestiontrajets.sequence</field>
+            <field name="prefix">TRJ</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_open_transport_dossier" model="ir.sequence">
+            <field name="name">dossier sequence</field>
+            <field name="code">open_transport.dossier.sequence</field>
+            <field name="prefix">DOS</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>
